@@ -96,3 +96,35 @@ $("reviewBtn").addEventListener("click",()=>$("reviewList").scrollIntoView({beha
 $("retryBtn").addEventListener("click",()=>startQuiz(lastResult.id));
 $("resultHomeBtn").addEventListener("click",()=>showView("home"));
 renderQuizCards();updateStats();
+// QuizVerse Demo Login
+document.addEventListener("DOMContentLoaded", function () {
+    const loginForm = document.getElementById("loginForm");
+    const loginScreen = document.getElementById("loginScreen");
+    const loginMessage = document.getElementById("loginMessage");
+
+    if (!loginForm || !loginScreen) return;
+
+    // Keep the demo login active until the user logs in.
+    loginScreen.style.display = "flex";
+
+    loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const username = document
+            .getElementById("loginUsername").value.trim();
+        const password = document
+            .getElementById("loginPassword").value;
+
+        if (username && password) {
+            sessionStorage.setItem("quizverseDemoUser", username);
+            loginScreen.style.display = "none";
+        } else {
+            loginMessage.textContent = "Please enter both fields.";
+        }
+    });
+
+    // Skip the login screen if already logged in during this session.
+    if (sessionStorage.getItem("quizverseDemoUser")) {
+        loginScreen.style.display = "none";
+    }
+});
